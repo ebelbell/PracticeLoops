@@ -19,3 +19,45 @@ while(x <= 100){
     x++;
 }
 */
+
+/*PART 2:
+Declare an arbitrary number, n.
+Create a loop that searches for the next prime number, starting at n and incrementing from there.
+As soon as you find the prime number, log that number and exit the loop.
+
+for(let n=0; n < 10; n++){
+    console.log(n, " is a prime number");
+} 
+
+let n = 20;
+while (true) {
+	let isPrime = true; //sets the statement to be a prime number until false
+
+    for(let n = 20; n <=n / 2; n++){
+        if(n % 2 !==0){ //if the number DOES have a remainder, it is a prime number, and will exit the loop
+            isPrime = false;
+            break;
+        }
+    console.log("The next prime number after is ", n);
+    }
+}
+*/
+
+
+
+/*PART 3: Using string processing
+Loop through the characters of a given CSV string.
+Store each “cell” of data in a variable.
+When you encounter a comma, move to the next cell.
+When you encounter the “\r\n” sequence, move to the next “row.”
+Log each row of data.
+You do not need to format the data, the following works well.
+console.log(cell1, cell2, cell3, cell4);
+*/
+let cell1 = 'ID';
+let cell2 = 'Name';
+let cell3 = 'Occupation';
+let cell4 = 'Age';
+let CSV = 'ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26';
+
+console.log(cell1, cell2, cell3, cell4);
