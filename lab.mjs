@@ -54,10 +54,51 @@ Log each row of data.
 You do not need to format the data, the following works well.
 console.log(cell1, cell2, cell3, cell4);
 */
+
+//use the let keyword instead of const so that the value in the cells can change
+const str = 'ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26';
 let cell1 = 'ID';
 let cell2 = 'Name';
 let cell3 = 'Occupation';
 let cell4 = 'Age';
-let CSV = 'ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26';
+//this placeholder will hold value in a string
+let placeholder = '';
+let counter = 0;
 
-console.log(cell1, cell2, cell3, cell4);
+for (let char of str){
+    //use the swtich function to make sure the program works
+    switch (char){
+        //If comma do this
+        case ",":
+            if (!cell1){
+                cell1 = placeholder;
+                placeholder = '';
+
+            } else if (!cell2) {
+                cell2 = placeholder;
+                placeholder = '';
+            } else {
+                cell3 = placeholder;
+                placeholder = '';
+            } 
+            //console.log('found comma');
+            break;
+            //If line do this
+            case "\n":
+                counter++;
+                cell4 = placeholder;
+                console.log(cell1, cell2, cell3, cell4);
+                cell1 = '';
+                cell2 = '';
+                cell3 = '';
+                cell4 = '';
+            break;
+        //If char do this
+        default:
+            counter++; //add 1 to each counter
+            placeholder += char; //add strings to the placeholder
+            //console.log('found char'); //this makes it so that when the code hits a comma at the top of rerunning the code, it puts it in a cell. This is commented out so that the program can print the cell variables
+            break;
+    }
+}
+//console.log(cell1, cell2, cell3, cell4);
