@@ -55,12 +55,14 @@ You do not need to format the data, the following works well.
 console.log(cell1, cell2, cell3, cell4);
 */
 
+
+/*ORIGINAL CODE FOR PART TWO
 //use the let keyword instead of const so that the value in the cells can change
-const str = 'ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26';
-let cell1 = 'ID';
-let cell2 = 'Name';
-let cell3 = 'Occupation';
-let cell4 = 'Age';
+const str = 'ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26\n';
+let cell1 = '';
+let cell2 = '';
+let cell3 = '';
+let cell4 = '';
 //this placeholder will hold value in a string
 let placeholder = '';
 let counter = 0;
@@ -68,7 +70,7 @@ let counter = 0;
 for (let char of str){
     //use the swtich function to make sure the program works
     switch (char){
-        //If comma do this
+        //If comma do this -------- If this cell, has a comma, check which cell is empty. Then, assign the value in the placeholder to that cell.
         case ",":
             if (!cell1){
                 cell1 = placeholder;
@@ -87,18 +89,62 @@ for (let char of str){
             case "\n":
                 counter++;
                 cell4 = placeholder;
-                console.log(cell1, cell2, cell3, cell4);
+                console.log(cell1, cell2, cell3, cell4); //cell4 can be assigned to a value before printing 
+                placeholder = '';
                 cell1 = '';
                 cell2 = '';
                 cell3 = '';
                 cell4 = '';
-            break;
+                break;
         //If char do this
         default:
             counter++; //add 1 to each counter
             placeholder += char; //add strings to the placeholder
             //console.log('found char'); //this makes it so that when the code hits a comma at the top of rerunning the code, it puts it in a cell. This is commented out so that the program can print the cell variables
-            break;
     }
 }
-//console.log(cell1, cell2, cell3, cell4);
+if (cell1 || cell2 || cell3 || cell4) {
+    console.log(cell1, cell2, cell3, cell4); //print the values of the last row after the loop ends
+} */
+
+
+
+//this lab is a build off of lab 308.3 
+//Declare a variable that stores the number of columns in each row of data within the CSV.
+    //line 12: let row = [];
+
+//use the let keyword instead of const so that the value in the cells can change
+//your code should accept any number of columns, based on the first row of data
+//use the let keyword instead of const so that the value in the cells can change
+const str = 'ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor’s Assistant,26\n';
+
+//transform rows into objects
+//store the number of columns in each row witin the CSV
+const dataCSV = [];
+let row = [];
+let cell = ''; //includes all the cells as a string
+
+//this array iteration checks each character in the string
+//length property lets us add an item to the end of the array
+for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+
+    //check for comma or newline to separate cells and rows
+    //split each row into its own array with individual entries for each column
+    if (char === ',' || char === '\n') {
+        row.push(cell); //push the current cell to the row array --> add elements to the end of the array
+        cell = ''; //reset cell for the next cell
+        if (char === '\n') {
+            dataCSV.push(row); //push the completed row to the data array
+            row = []; //reset row for the next row
+        }
+    }   
+    else {
+        cell += char; //check and add the character to the current cell
+    }
+}
+
+// Output the parsed data
+for (let row of dataCSV) {
+    console.log(row.join(' ')); //this code joins cells with a space
+}
